@@ -4,15 +4,20 @@ import {ICategory} from "../../models/Interfaces";
 import Subcategory from "../Subcategory/Subcategory";
 
 interface ICategoryProps {
-    subcategories: ICategory[];
+    parentCategories: ICategory[];
+    handleCreateCategory: (id: number, name: string) => void
 }
 
-const Category: React.FC<ICategoryProps> = ({subcategories}) => {
+const Category: React.FC<ICategoryProps> = ({parentCategories, handleCreateCategory}) => {
         return (
             <ul className='categories'>
-                {subcategories.map((subcategory) => {
+                {parentCategories.map((subcategory) => {
                     return (
-                        <Subcategory key={subcategory.id} subcategory={subcategory}/>
+                        <Subcategory
+                            key={subcategory.id}
+                            subcategory={subcategory}
+                            handleCreateCategory={handleCreateCategory}
+                        />
                     )
                 })}
             </ul>
